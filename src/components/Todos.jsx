@@ -1,14 +1,13 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { removeTodo } from '../store/slices/todoSlice'
-import Container from './Container'
+import { removeTodo, toggleTodo } from '../store/slices/todoSlice'
 
 const Todos = () => {
 	const todos = useSelector(state => state.todoReducer.todos)
 	const dispatch = useDispatch()
 
 	return (
-		<Container>
+		<>
 			<div className='text-4xl text-center mt-3 mb-6'>Todos</div>
 			<ul className='list-none'>
 				{todos.map(todo => (
@@ -16,7 +15,14 @@ const Todos = () => {
 						className='mt-4 flex justify-between items-center bg-zinc-800 px-4 py-2 rounded'
 						key={todo.id}
 					>
-						<div className='text-white'>{todo.text}</div>
+						<button
+							className={`text-white ${
+								todo.completed ? 'line-through opacity-60' : ''
+							}`}
+							onClick={e => dispatch(toggleTodo(todo.id))}
+						>
+							{todo.text}
+						</button>
 						<button
 							className='text-white bg-red-500 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md'
 							onClick={e => dispatch(removeTodo(todo.id))}
@@ -39,7 +45,7 @@ const Todos = () => {
 					</li>
 				))}
 			</ul>
-		</Container>
+		</>
 	)
 }
 

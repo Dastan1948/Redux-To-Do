@@ -1,12 +1,13 @@
 import AddTodo from './components/AddTodo'
+import Container from './components/Container'
 import Todos from './components/Todos'
 
 function App() {
 	return (
-		<div className='App'>
+		<Container>
 			<AddTodo />
 			<Todos />
-		</div>
+		</Container>
 	)
 }
 
